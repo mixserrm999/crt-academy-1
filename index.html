@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRT Academy | เรียนรู้ Candle Range Theory</title>
+  <meta name="description" content="เว็บเรียนรู้ระบบเทรด CRT (Candle Range Theory) พร้อมตัวอย่างแท่งเทียน ห้องทดลอง แบบทดสอบ และเครื่องคำนวณ Risk/Reward" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a href="#hero" class="brand">CRT<span>Academy</span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="เปิดเมนู">☰</button>
+    <nav id="nav">
+      <a href="#intro">พื้นฐาน</a>
+      <a href="#patterns">รูปแบบ</a>
+      <a href="#lab">ห้องทดลอง</a>
+      <a href="#timeframe">Timeframe</a>
+      <a href="#entry">การเข้าเทรด</a>
+      <a href="#quiz">แบบทดสอบ</a>
+      <a href="#calc">คำนวณ RR</a>
+      <a href="#checklist-sec">Checklist</a>
+      <a href="#glossary">คำศัพท์</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="hero" class="hero">
+      <div>
+        <span class="eyebrow">Candle Range Theory</span>
+        <h1>เข้าใจ CRT จาก<br><span class="hl">แท่งเทียนแค่ 3 แท่ง</span></h1>
+        <p class="lead">เรียนรู้เรื่องกรอบราคา (Range) การกวาดสภาพคล่อง (Sweep) และเป้าหมายราคา ผ่านตัวอย่างกราฟ ห้องทดลองที่ปรับแท่งเทียนได้เอง และแบบทดสอบที่สุ่มโจทย์ใหม่ทุกครั้ง</p>
+        <div class="hero-actions">
+          <a href="#intro" class="btn primary">เริ่มเรียน</a>
+          <a href="#quiz" class="btn">ทดสอบความเข้าใจ</a>
+        </div>
+      </div>
+      <div>
+        <svg id="heroChart" class="chart" role="img" aria-label="แอนิเมชันตัวอย่าง Bullish CRT"></svg>
+        <p class="caption" id="heroCaption"></p>
+      </div>
+    </section>
+
+    <!-- 1. INTRO -->
+    <section id="intro">
+      <h2>1. CRT คืออะไร?</h2>
+      <p>CRT (Candle Range Theory) มองว่า <b>แท่งเทียนทุกแท่งคือกรอบราคา (Range)</b> เหนือ High และใต้ Low ของกรอบมักมีคำสั่ง Stop Loss / Pending Order สะสมอยู่ (สภาพคล่อง) เมื่อแท่งถัดไปทะลุออกไปกวาดสภาพคล่องฝั่งหนึ่งแล้ว <b>ปิดกลับเข้ามาในกรอบ</b> ราคามีโอกาสวิ่งไปหาอีกฝั่งของกรอบ</p>
+      <p>แนวคิดนี้สอดคล้องกับ Power of 3 / AMD (Accumulation – Manipulation – Distribution) ในสาย ICT</p>
+
+      <div class="grid-3">
+        <div class="card"><div class="step-no">C1</div><h4>Range Candle</h4><p>แท่งที่ใช้กำหนดกรอบ: <b>CRT High</b>, <b>CRT Low</b> และจุดกึ่งกลาง <b>50%</b></p></div>
+        <div class="card"><div class="step-no">C2</div><h4>Manipulation</h4><p>ทะลุ High หรือ Low ของ C1 เพื่อกวาดสภาพคล่อง แล้ว <b>ปิดกลับเข้าในกรอบ</b></p></div>
+        <div class="card"><div class="step-no">C3</div><h4>Distribution</h4><p>ช่วงที่คาดว่าราคาจะวิ่งไปหา 50% และอีกฝั่งของกรอบ</p></div>
+      </div>
+
+      <h3>ภาพรวม Bullish CRT</h3>
+      <svg id="anatomyChart" class="chart" role="img" aria-label="ส่วนประกอบของ CRT"></svg>
+
+      <h3>กฎที่ใช้ตัดสิน (ทุกส่วนของเว็บใช้กฎชุดนี้)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>เงื่อนไข</th><th>Bullish CRT</th><th>Bearish CRT</th></tr></thead>
+          <tbody>
+            <tr><td>การกวาด (Sweep)</td><td>C2 Low &lt; C1 Low</td><td>C2 High &gt; C1 High</td></tr>
+            <tr><td>ราคาปิดของ C2</td><td>C2 Close &gt; C1 Low</td><td>C2 Close &lt; C1 High</td></tr>
+            <tr><td>อีกฝั่งของกรอบ</td><td>C2 High ≤ C1 High</td><td>C2 Low ≥ C1 Low</td></tr>
+            <tr><td>เป้าหมาย</td><td>TP1 = 50% → TP2 = CRT High</td><td>TP1 = 50% → TP2 = CRT Low</td></tr>
+            <tr><td>จุดตัดขาดทุน</td><td>ใต้ Low ของ C2 (ไส้ที่ Sweep)</td><td>เหนือ High ของ C2</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note">ถ้า C2 <b>กวาดทั้งสองฝั่ง</b> (Outside Bar), <b>ปิดนอกกรอบ</b> (Breakout) หรือ <b>ไม่กวาดเลย</b> (Inside Bar) จะไม่นับเป็น CRT</div>
+    </section>
+
+    <!-- 2. PATTERNS -->
+    <section id="patterns">
+      <h2>2. รูปแบบ CRT ที่ควรรู้</h2>
+      <p>มีทั้ง Setup ที่ถูกต้อง กรณีที่ <b>ไม่ใช่</b> CRT และผลลัพธ์ที่เกิดขึ้นได้จริง (รวมถึงกรณีแพ้)</p>
+      <div class="filters" id="patternFilters">
+        <button class="chip active" data-filter="all">ทั้งหมด</button>
+        <button class="chip" data-filter="core">Setup หลัก</button>
+        <button class="chip" data-filter="invalid">ไม่ใช่ CRT</button>
+        <button class="chip" data-filter="outcome">ผลลัพธ์</button>
+        <button class="chip" data-filter="advanced">ขั้นสูง</button>
+      </div>
+      <div class="pattern-grid" id="patternGrid"></div>
+    </section>
+
+    <!-- 3. LAB -->
+    <section id="lab">
+      <h2>3. ห้องทดลอง: ปรับแท่ง C2 เอง</h2>
+      <p>C1 ถูกล็อกไว้ที่กรอบ <span class="mono">100.00 – 110.00</span> ลองเลื่อนค่า Open / High / Low / Close ของ C2 แล้วดูว่าระบบตัดสินอย่างไร</p>
+      <div class="lab">
+        <div class="card">
+          <div class="presets">
+            <button class="chip" data-preset="bullish">Bullish</button>
+            <button class="chip" data-preset="bearish">Bearish</button>
+            <button class="chip" data-preset="breakout">Breakout</button>
+            <button class="chip" data-preset="breakdown">Breakdown</button>
+            <button class="chip" data-preset="inside">Inside</button>
+            <button class="chip" data-preset="outside">Outside</button>
+          </div>
+          <div class="slider-row"><label>Open <span id="v-o" class="mono"></span></label><input type="range" id="s-o" min="94" max="116" step="0.1"></div>
+          <div class="slider-row"><label>High <span id="v-h" class="mono"></span></label><input type="range" id="s-h" min="94" max="116" step="0.1"></div>
+          <div class="slider-row"><label>Low <span id="v-l" class="mono"></span></label><input type="range" id="s-l" min="94" max="116" step="0.1"></div>
+          <div class="slider-row"><label>Close <span id="v-c" class="mono"></span></label><input type="range" id="s-c" min="94" max="116" step="0.1"></div>
+          <p class="hint">High/Low จะปรับอัตโนมัติให้ครอบคลุม Open/Close เสมอ</p>
+        </div>
+        <div>
+          <svg id="labChart" class="chart" role="img" aria-label="กราฟห้องทดลอง"></svg>
+          <div id="labResult" class="result"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. TIMEFRAME -->
+    <section id="timeframe">
+      <h2>4. การจับคู่ Timeframe</h2>
+      <p>หลักคือ <b>ใช้ TF ใหญ่กำหนดกรอบ (C1/C2)</b> แล้ว <b>ลง TF เล็กเพื่อหาจุดเข้า</b></p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>TF ของกรอบ CRT</th><th>TF หาจุดเข้า</th><th>สไตล์</th></tr></thead>
+          <tbody>
+            <tr><td>Monthly</td><td>Daily / H4</td><td>Position</td></tr>
+            <tr><td>Weekly</td><td>H4 / H1</td><td>Swing</td></tr>
+            <tr><td>Daily</td><td>H1 / M15</td><td>Swing – Intraday</td></tr>
+            <tr><td>H4</td><td>M15 / M5</td><td>Intraday</td></tr>
+            <tr><td>H1</td><td>M5 / M1</td><td>Scalping</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>แท่ง H4 ที่ชุมชน CRT นิยมดู</h3>
+      <p>นักเทรดสาย CRT นิยมดูแท่ง H4 ที่เปิดเวลา <b>01:00, 05:00 และ 09:00 ตามเวลานิวยอร์ก</b> เพราะครอบคลุมช่วงเปิดตลาดลอนดอนและนิวยอร์ก</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>เวลา NY</th><th>เวลาไทย (ช่วง US Daylight / มี.ค.–พ.ย.)</th><th>เวลาไทย (ช่วงฤดูหนาว US)</th><th>ช่วงตลาด</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">01:00</td><td class="mono">12:00</td><td class="mono">13:00</td><td>ครอบคลุมการเปิดตลาดลอนดอน</td></tr>
+            <tr><td class="mono">05:00</td><td class="mono">16:00</td><td class="mono">17:00</td><td>ลอนดอน ก่อนนิวยอร์กเปิด</td></tr>
+            <tr><td class="mono">09:00</td><td class="mono">20:00</td><td class="mono">21:00</td><td>นิวยอร์ก (ข่าวสหรัฐฯ / เปิดตลาดหุ้น)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note">แท่ง H4 จะตรงกับเวลานิวยอร์กเมื่อเวลาเซิร์ฟเวอร์ของโบรกเกอร์เป็น GMT+2/GMT+3 (อิงเวลาปิดตลาดนิวยอร์ก) ถ้าโบรกใช้เวลาอื่น แท่งจะเหลื่อมกัน ควรตรวจสอบก่อนใช้งาน</div>
+    </section>
+
+    <!-- 5. ENTRY -->
+    <section id="entry">
+      <h2>5. โมเดลการเข้าเทรด</h2>
+      <ol class="steps">
+        <li>กำหนดทิศทางหลัก (Bias) จาก TF ใหญ่ และเลือก C1 ที่อยู่ใกล้ Key Level เช่น HTF Order Block / FVG / แนวรับต้านสำคัญ</li>
+        <li>ตีเส้น <b>CRT High</b>, <b>CRT Low</b> และ <b>50%</b> จากแท่ง C1</li>
+        <li>รอ C2 กวาดฝั่งใดฝั่งหนึ่ง อย่ารีบสวนขณะที่ราคากำลังวิ่งทะลุกรอบ</li>
+        <li>ลง TF เล็ก รอ <b>MSS</b> (เบรกโครงสร้างกลับทิศ) ที่เกิดพร้อม FVG หรือ Order Block</li>
+        <li>เข้าเมื่อราคาย่อกลับมาที่ FVG / OB และวาง SL เลยไส้ Sweep ออกไป</li>
+        <li>TP1 ที่ 50% (แบ่งปิดหรือเลื่อน SL บังทุน) และ TP2 ที่อีกฝั่งของกรอบ</li>
+        <li>ถ้า C2 ของ TF ใหญ่ <b>ปิดนอกกรอบ</b> ให้ยกเลิก Setup ทันที</li>
+      </ol>
+
+      <h3>ตัวอย่างใน TF เล็ก: Sweep → MSS → เข้าที่ FVG</h3>
+      <svg id="entryChart" class="chart" role="img" aria-label="ตัวอย่างการเข้าเทรดใน TF เล็ก"></svg>
+
+      <div class="grid-2">
+        <div class="card">
+          <h4>แบบรอยืนยัน (Conservative)</h4>
+          <p>รอให้ C2 ของ TF ใหญ่ปิดกลับในกรอบก่อน แล้วค่อยหาจังหวะเข้าระหว่าง C3</p>
+          <ul class="muted-list"><li><b>ข้อดี:</b> Setup ยืนยันแล้ว</li><li><b>ข้อเสีย:</b> จุดเข้าไกลจากไส้ ทำให้ RR ต่ำลง</li></ul>
+        </div>
+        <div class="card">
+          <h4>แบบเชิงรุก (Aggressive)</h4>
+          <p>เข้าระหว่างที่ C2 ยังไม่ปิด โดยใช้ MSS + FVG ใน TF เล็กยืนยัน</p>
+          <ul class="muted-list"><li><b>ข้อดี:</b> RR สูง</li><li><b>ข้อเสีย:</b> C2 อาจปิดนอกกรอบ ทำให้ Setup ล้ม</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. QUIZ -->
+    <section id="quiz">
+      <h2>6. แบบทดสอบ: นี่คือ CRT หรือไม่?</h2>
+      <p>ดูแท่ง C1 และ C2 (มีค่า OHLC ให้ด้านล่างเพื่อความแม่นยำ) แล้วเลือกคำตอบ</p>
+      <div class="quiz-stats">
+        <div class="stat"><span id="qScore">0</span><small>ถูก</small></div>
+        <div class="stat"><span id="qTotal">0</span><small>ทั้งหมด</small></div>
+        <div class="stat"><span id="qAcc">0%</span><small>ความแม่นยำ</small></div>
+        <div class="stat"><span id="qStreak">0</span><small>ถูกติดกัน</small></div>
+        <div class="stat"><span id="qBest">0</span><small>สถิติสูงสุด</small></div>
+      </div>
+      <svg id="quizChart" class="chart" role="img" aria-label="โจทย์แบบทดสอบ"></svg>
+      <div class="quiz-ohlc mono" id="quizOhlc"></div>
+      <div class="quiz-options">
+        <button class="btn answer" data-answer="bullish">Bullish CRT</button>
+        <button class="btn answer" data-answer="bearish">Bearish CRT</button>
+        <button class="btn answer" data-answer="none">ไม่ใช่ CRT</button>
+      </div>
+      <div id="quizFeedback" class="feedback"></div>
+      <div class="quiz-actions">
+        <button class="btn primary" id="quizNext">ข้อถัดไป →</button>
+        <button class="btn ghost" id="quizReset">รีเซ็ตคะแนน</button>
+      </div>
+    </section>
+
+    <!-- 7. CALCULATOR -->
+    <section id="calc">
+      <h2>7. เครื่องคำนวณ SL / TP / RR / ขนาดสถานะ</h2>
+      <div class="card">
+        <div class="form-grid">
+          <label>ทิศทาง
+            <select id="cDir"><option value="bull">Bullish CRT (Buy)</option><option value="bear">Bearish CRT (Sell)</option></select>
+          </label>
+          <label>CRT High (C1 High)<input type="number" id="cHigh" value="110" step="any"></label>
+          <label>CRT Low (C1 Low)<input type="number" id="cLow" value="100" step="any"></label>
+          <label><span id="cSweepText">จุด Sweep (C2 Low)</span><input type="number" id="cSweep" value="97.5" step="any"></label>
+          <label>ราคาเข้า (Entry)<input type="number" id="cEntry" value="102" step="any"></label>
+          <label>Buffer ของ SL (หน่วยราคา)<input type="number" id="cBuffer" value="0.3" step="any" min="0"></label>
+          <label>ขนาดพอร์ต (เงิน)<input type="number" id="cBalance" value="1000" step="any" min="0"></label>
+          <label>ความเสี่ยงต่อไม้ (%)<input type="number" id="cRisk" value="1" step="0.1" min="0"></label>
+        </div>
+      </div>
+      <div class="calc-out">
+        <div id="calcResult" class="result"></div>
+        <svg id="calcChart" class="chart" role="img" aria-label="กราฟระดับราคา"></svg>
+      </div>
+      <p class="hint">* ขนาดสถานะคำนวณเป็น "จำนวนหน่วยของสินทรัพย์" ต้องแปลงเป็น Lot ตามขนาดสัญญาของโบรกเกอร์ เช่น Forex 1 Lot = 100,000 หน่วย ส่วนทองคำ 1 Lot มักเท่ากับ 100 ออนซ์</p>
+    </section>
+
+    <!-- 8. CHECKLIST -->
+    <section id="checklist-sec">
+      <h2>8. Checklist ก่อนเข้าเทรด</h2>
+      <div class="progress"><div id="checkBar"></div></div>
+      <p id="checkText" class="muted"></p>
+      <ul class="checklist" id="checklist"></ul>
+      <button class="btn ghost" id="checkReset" style="margin-top:12px">ล้างการติ๊ก</button>
+
+      <h3>ข้อผิดพลาดที่พบบ่อย</h3>
+      <div class="note danger">
+        <ul class="muted-list">
+          <li>สวนเทรนด์ทันทีขณะที่ราคากำลังทะลุกรอบ โดยไม่รอให้ปิดแท่งหรือรอการยืนยัน</li>
+          <li>นับ C2 ที่ <b>ปิดนอกกรอบ</b> ว่าเป็น CRT</li>
+          <li>วาง SL ไว้ในไส้ Sweep แคบเกินไป จนโดนกวาดซ้ำ</li>
+          <li>เทรดทุกแท่ง แทนที่จะเลือกเฉพาะกรอบที่อยู่ใน Key Level ของ TF ใหญ่</li>
+          <li>ไม่ดูปฏิทินข่าว เพราะข่าวแรงทำให้ Sweep ลึกผิดปกติ</li>
+          <li>เพิ่มขนาดไม้หลังแพ้ (Revenge Trade)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 9. GLOSSARY -->
+    <section id="glossary">
+      <h2>9. คำศัพท์</h2>
+      <dl class="glossary" id="glossaryList"></dl>
+    </section>
+  </main>
+
+  <footer>
+    <p><b>คำเตือน:</b> เนื้อหาในเว็บนี้มีไว้เพื่อการศึกษาเท่านั้น ไม่ใช่คำแนะนำการลงทุน การเทรดมีความเสี่ยงสูงและอาจทำให้สูญเสียเงินทุนทั้งหมด กราฟทุกภาพในเว็บเป็นข้อมูลจำลอง ไม่ใช่ข้อมูลตลาดจริง ส่วนผลลัพธ์ในแบบทดสอบเป็นการสุ่ม ไม่ใช่สถิติความแม่นยำของระบบ</p>
+    <p class="muted">© CRT Academy · Static Web App</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
